@@ -14,7 +14,7 @@ public class BeanConfig {
                 .route(r -> r.path("/warehouse/**")
                         .uri("lb://Warehouse/")
                         .id("Warehouse"))
-                .route(r -> r.path("/order/**")
+                .route(r -> r.path("/orders/**")
                         .uri("lb://Order/")
                         .id("Order"))
                 .route(r -> r.path("/payment/**")

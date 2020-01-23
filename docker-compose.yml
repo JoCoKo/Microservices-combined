@@ -1,0 +1,71 @@
+version: '3'
+services:
+    eureka:
+        hostname: eureka
+        build: ./eureka3
+        ports:
+          - "8761:8761"
+    mongo:
+        image: mongo
+        hostname: mongo
+        ports:
+          - "27017:27017"  
+      
+    rabbit:
+        image: rabbitmq:3.8-management
+        hostname: rabbit
+        ports:
+          - "15673:15672"
+        ports :
+          - "5673:5672"
+        volumes:
+          - ./rabbitmq-isolated.conf:/etc/rabbitmq/rabbitmq.config
+          
+    warehouse:
+        build: ./warehouse
+        ports:
+          - "0:8080"
+        depends_on:
+          -  mongo
+          -  rabbit
+          -  eureka
+               
+    gateway:
+        hostname: gateway
+        build: ./gateway
+        ports:
+          - "8088:8088"
+        depends_on:
+          -  rabbit
+          -  eureka
+          
+    postgres:
+        image: postgres
+        hostname: postgres
+        environment:
+          POSTGRES_USER: postgres 
+          POSTGRES_PASSWORD: qwe
+          POSTGRES_DB: order
+          PGPASSWORD: qwe
+        ports:
+          - "0:5432"
+          
+    order:
+        hostname: order
+        build: ./order
+        ports:
+          - "0:8080"
+        depends_on:
+          -  rabbit
+          -  eureka
+          -  postgres
+          
+    payment:
+        hostname: payment
+        build: ./payment
+        ports:
+          - "8080:8080"        
+        depends_on:
+          -  eureka  
+          -  mongo
+          -  rabbit
