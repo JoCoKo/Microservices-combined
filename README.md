@@ -1,7 +1,7 @@
 # Microservices-combined
 Проект по курсу "Технологии разработки программного обеспечения"
 
-[Техническое задание](https://docs.google.com/document/d/1FKO65Ga0rRVPVArQERqO__3fkOeCWFGgSKRb6_tCX9U/edit)
+[Техническое задание](https://docs.google.com/document/d/1FKO65Ga0rRVPVArQERqO__3fkOeCWFGgSKRb6_tCX9U/edit#heading=h.34u7x9ucruln)
 ## How to use
 
 1. Спулить текущий репозиторий
